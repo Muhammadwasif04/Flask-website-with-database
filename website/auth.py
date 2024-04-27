@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, request, flash
+from models import User
+from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint('auth', __name__)
 
@@ -33,5 +35,8 @@ def register():
         elif password < 7:
             flash('Password contain special characters')
         else:
+            new_user = User(email=email, first_name=first_name, last_name=last_name,
+                            username=username, password=generate_password_hash(password, method='sha256'))
+            db.session.add
             flash('Account created!', category='success')
     return render_template('register.html')
