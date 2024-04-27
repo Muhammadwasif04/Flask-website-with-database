@@ -1,3 +1,103 @@
 {% extends "base.html" %}
-{% block title %} Changed {% endblock %}
-{% block content %}{% endblock %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 50px;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .note-container {
+        margin-top: 20px;
+    }
+    .note {
+        background-color: #f9f9f9;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    .note h2 {
+        margin-top: 0;
+    }
+    .note p {
+        margin-bottom: 0;
+    }
+    form {
+        text-align: center;
+    }
+    input[type="text"] {
+        width: 70%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    textarea {
+        width: 70%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Daily Notes</h1>
+    <form id="noteForm">
+        <input type="text" id="noteTitle" placeholder="Note Title" required><br>
+        <textarea id="noteContent" placeholder="Write your note here" rows="4" required></textarea><br>
+        <input type="submit" value="Add Note">
+    </form>
+    <div class="note-container" id="noteContainer">
+        <!-- Existing notes will be displayed here -->
+    </div>
+</div>
+
+<script>
+    // Function to handle form submission
+    document.getElementById('noteForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        // Get input values
+        var title = document.getElementById('noteTitle').value;
+        var content = document.getElementById('noteContent').value;
+        // Create new note element
+        var newNote = document.createElement('div');
+        newNote.classList.add('note');
+        newNote.innerHTML = '<h2>' + title + '</h2><p>' + content + '</p>';
+        // Add new note to the note container
+        document.getElementById('noteContainer').appendChild(newNote);
+        // Reset form inputs
+        document.getElementById('noteForm').reset();
+    });
+</script>
+</body>
+</html>
+{% endblock %}
